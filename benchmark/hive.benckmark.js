@@ -52,6 +52,7 @@ var testDeletion = function(hive) {
     for (var i = l - 1; i > 0; i--) {
         var w = permuttedWords[i];
         hive.remove(w);
+
     }
     var end = new Date();
     printStats("HIVE", "DELETION", start, end);
@@ -60,7 +61,6 @@ var testDeletion = function(hive) {
 
 var test = function() {
     var arr = [], hive = new Hive();
-
     console.log("STARTING TEST....");
     testInserts(hive);
     testLookUps(hive);
