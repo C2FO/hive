@@ -1,0 +1,21 @@
+{
+    "name": "hive",
+    "description": "A caching tool for node",
+    "version": "0.0.1",
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:Pollen-LLC/hive.git"
+    },
+    "author": "Doug Martin (http://www.pollenware.com)",
+    "main": "index.js",
+    "directories": {
+        "lib": "lib"
+    },
+    "dependencies" :
+    {
+        "vows" : "*"
+    },
+    "engines": {
+        "node": ">= 0.4.4"
+    }
+}
