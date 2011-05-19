@@ -16,7 +16,11 @@ var wordTree = new AVLTree();
 
 
 var printStats = function(name, op, start, end) {
-    console.log(name + " " + op + " TIME = %dms", (+end) - (+start));
+    var time = (+end) - (+start);
+    console.log(name + " " + op + " TIME = %dms", time);
+    if (time) {
+        console.log("%d " + op + " PER SECOND ", (permuttedWords.length / (time / 1000)));
+    }
 };
 
 var testInserts = function(hive) {
@@ -49,11 +53,7 @@ var testDeletion = function(hive) {
     var l = permuttedWords.length;
     console.log("DELETING %d records", l);
     var start = new Date();
-    for (var i = l - 1; i > 0; i--) {
-        var w = permuttedWords[i];
-        hive.remove(w);
-
-    }
+    hive.flushAll();
     var end = new Date();
     printStats("HIVE", "DELETION", start, end);
 };
