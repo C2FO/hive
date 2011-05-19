@@ -13,7 +13,8 @@
     },
     "dependencies" :
     {
-        "vows" : "*"
+        "vows" : "*",
+        "comb" : "*"
     },
     "engines": {
         "node": ">= 0.4.4"
