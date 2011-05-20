@@ -14,7 +14,7 @@ Please see <http://pollenware.github.com/hive>
 License
 -------
 
-This content is released under the MIT License: <https://github.com/Pollenware/moose/raw/master/LICENSE>
+MIT <https://github.com/Pollenware/hive/raw/master/LICENSE>
 
 Meta
 ----
