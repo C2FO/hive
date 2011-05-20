@@ -4,9 +4,9 @@
     "version": "0.0.1",
     "repository": {
         "type": "git",
-        "url": "git@github.com:Pollen-LLC/hive.git"
+        "url": "git@github.com:Pollen/hive.git"
     },
-    "author": "Doug Martin (http://www.pollenware.com)",
+    "author": "Doug Martin (http://pollenware.github.com)",
     "main": "index.js",
     "directories": {
         "lib": "lib"
