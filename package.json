@@ -1,7 +1,7 @@
 {
     "name": "hive-cache",
     "description": "A caching tool for node",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "repository": {
         "type": "git",
         "url": "git@github.com:Pollen/hive.git"
@@ -14,9 +14,9 @@
     "dependencies" :
     {
         "vows" : "*",
-        "comb" : "*"
+        "comb" : ">=0.0.5"
     },
     "engines": {
-        "node": ">= 0.4.4"
+        "node": ">= 0.6.1"
     }
 }
