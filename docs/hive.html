@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hive</title>
+    <link rel="stylesheet" href="./assets/css/bootstrap.css">
+    <link rel="stylesheet" href="./assets/css/prettify.css">
+    <style type="text/css">
+        
+
+/*.subnav-inner {*/
+    /*width: 100%;*/
+    /*height: 36px;*/
+    /*background-color: #EEE;*/
+    /*background-repeat: repeat-x;*/
+    /*background-image: -moz-linear-gradient(top, whiteSmoke 0%, #EEE 100%);*/
+    /*background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, whiteSmoke), color-stop(100%, #EEE));*/
+    /*background-image: -webkit-linear-gradient(top, whiteSmoke 0%, #EEE 100%);*/
+    /*background-image: -ms-linear-gradient(top, whiteSmoke 0%, #EEE 100%);*/
+    /*background-image: -o-linear-gradient(top, whiteSmoke 0%, #EEE 100%);*/
+    /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#f5f5f5', endColorstr = '#eeeeee', GradientType = 0);*/
+    /*background-image: linear-gradient(top, whiteSmoke 0%, #EEE 100%);*/
+    /*-webkit-border-radius: 4px;*/
+    /*-moz-border-radius: 4px;*/
+    /*border-radius: 4px;*/
+/*}*/
+
+/*.subnav .nav > li > a:hover {*/
+    /*color: black !important;*/
+/*}*/
+
+/*.subnav .nav li.dropdown .dropdown-toggle .caret,*/
+/*.subnav .nav li.dropdown.open .caret {*/
+    /*border-top-color: #999 !important;*/
+    /*border-bottom-color: #999 !important;*/
+/*}*/
+
+/*.subnav-fixed {*/
+    /*position: fixed;*/
+    /*width : 90%;*/
+    /*margin-right: auto;*/
+    /*margin-left: auto;*/
+    /*top: 40px;*/
+    /*left: 0;*/
+    /*right: 0;*/
+    /*z-index: 1020;*/
+    /*border-color: #D5D5D5;*/
+    /*border-width: 0 0 1px;*/
+    /*-webkit-border-radius: 0;*/
+    /*-moz-border-radius: 0;*/
+    /*border-radius: 0;*/
+    /*-webkit-box-shadow: inset 0 1px 0 #fff, 0 1px 5px rgba(0,0,0,.1);*/
+    /*-moz-box-shadow: inset 0 1px 0 #fff, 0 1px 5px rgba(0,0,0,.1);*/
+    /*box-shadow: inset 0 1px 0 #fff, 0 1px 5px rgba(0,0,0,.1);*/
+    /*filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);*/
+/*}*/
+
+/*.navbar .nav  .dropdown-menu {*/
+    /*max-height: 500px;*/
+    /*overflow: auto;*/
+/*}​*/
+
+    </style>
+    <style type="text/css">
+        body {
+            padding: 90px;
+        }
+
+        .subnav{
+            margin-top: 40px;
+            margin-right: auto;
+            margin-left: auto;
+            z-index: 1000;
+        }
+
+        @media (max-width:979px) {
+            .subnav{
+                margin-top: auto;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="./assets/css/bootstrap-responsive.css">
+    <script type="text/javascript">
+        var init = (function () {
+            "use strict";
+
+            var processScroll = (function () {
+                var curr = null, prev = null;
+                return function (nav) {
+                    var $win = $(window);
+                    $('.subnav').each(function () {
+                        var nav = $(this);
+                        var navTop = $win.width() < 980 ? 0 : nav.offset().top - 40;
+
+                        var scrollTop = $win.scrollTop();
+                        if (scrollTop >= navTop && curr != nav) {
+                            if(curr){
+                                curr.removeClass('subnav-fixed')
+                                prev = curr;
+                            }
+                            curr = nav;
+                            curr.addClass('subnav-fixed')
+                        } else if (curr == nav && scrollTop <= navTop) {
+                            curr.removeClass('subnav-fixed');
+                            prev.addClass('subnav-fixed');
+                            curr = prev;
+                        }else{
+                            nav.removeClass('subnav-fixed');
+                        }
+                    });
+                };
+            })();
+
+            return function () {
+                window.prettyPrint && prettyPrint();
+                $(".collapse").collapse();
+                var $window = $(window);
+                //$(".subnav").affix ();
+                // fix sub nav on scroll
+//                processScroll();
+//                $(window).on('scroll', processScroll)
+            }
+        })();
+    </script>
+</head>
+<body onload="init()">
+<div class="navbar navbar-fixed-top navbar-inverse">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"> </span>
+            </a>
+            
+            <a href="./index.html" class="brand">hive</a>
+            
+            <div class="nav-collapse">
+                <ul class="nav">
+                    
+
+                        
+                    
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+                            <li><a href="./Hive.html">Hive</a></li>
+                            
+                        </ul>
+                    </li>
+                    
+                </ul>
+                
+                <ul class="nav pull-right">
+
+                    <li class="divider-vertical"></li>
+                    <li><a href="http://c2fo.github.com/hive" target="#github" class="pull-right">github</a></li>
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container-fluid">
+    <a name="top"></a>
+    <div class="container">
+
+
+
+    <a name=""></a>
+    <div class="navbar subnav navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a href="#" class="brand">
+                Hive
+                
+                
+                <span class="label label-success">Public</span>
+                
+                
+            </a>
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".sub-nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+
+            <div class="nav-collapse sub-nav-collapse">
+
+                <ul class="nav pull-right">
+                    <li><a href="#constructor">Constructor</a></li>
+                    
+                    
+                    
+                    
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Instance Methods<b
+                                class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+                            <li><a href="./Hive.html#__castKey">
+                                
+                                
+                                <span class="label label-label">F</span>
+                                
+                                
+                                <span class="label label-important">P</span>
+                                
+                                __castKey
+
+                            </a></li>
+                            
+                            <li><a href="./Hive.html#_checkValues">
+                                
+                                
+                                <span class="label label-label">F</span>
+                                
+                                
+                                <span class="label label-important">P</span>
+                                
+                                _checkValues
+
+                            </a></li>
+                            
+                            <li><a href="./Hive.html#_convertSeconds">
+                                
+                                
+                                <span class="label label-label">F</span>
+                                
+                                
+                                <span class="label label-important">P</span>
+                                
+                                _convertSeconds
+
+                            </a></li>
+                            
+                            <li><a href="./Hive.html#append">
+                                
+                                
+                                <span class="label label-label">F</span>
+                                
+                                
+                                
+                                <span class="label label-success">P</span>
+                                
+                                
+                                append
+
+                            </a></li>
+                            
+                            <li><a href="./Hive.html#decr">
+                                
+                                
+                                <span class="label label-label">F</span>
+                                
+                                
+                                
+                                <span class="label label-success">P</span>
+                                
+                                
+                                decr
+
+                            </a></li>
+                            
+                            <li><a href="./Hive.html#flushAll">
+                                
+                                
+                                <span class="label label-label">F</span>
+                                
+                                
+                                
+                                <span class="label label-success">P</span>
+                                
+                                
+                                flushAll
+
+                            </a></li>
+                            
+                            <li><a href="./Hive.html#get">
+                                
+                                
+                                <span class="label label-label">F</span>
+                                
+                                
+                                
+                                <span class="label label-success">P</span>
+                                
+                                
+                                get
+
+                            </a></li>
+                            
+                            <li><a href="./Hive.html#getKeyGt">
+                                
+                                
+                                <span class="label label-label">F</span>
+                                
+                                
+                                
+                                <span class="label label-success">P</span>
+                                
+                                
+                                getKeyGt
+
+                            </a></li>
+                            
+                            <li><a href="./Hive.html#getKeyGte">
+                                
+                                
+                                <span class="label label-label">F</span>
+                                
+                                
+                                
+                                <span class="label label-success">P</span>
+                                
+                                
+                                getKeyGte
+
+                            </a></li>
+                            
+                            <li><a href="./Hive.html#getKeyLt">
+                                
+                                
+                                <span class="label label-label">F</span>
+                                
+                                
+                                
+                                <span class="label label-success">P</span>
+                                
+                                
+                                getKeyLt
+
+                            </a></li>
+                            
+                            <li><a href="./Hive.html#getKeyLte">
+                                
+                                
+                                <span class="label label-label">F</span>
+                                
+                                
+                                
+                                <span class="label label-success">P</span>
+                                
+                                
+                                getKeyLte
+
+                            </a></li>
+                            
+                            <li><a href="./Hive.html#incr">
+                                
+                                
+                                <span class="label label-label">F</span>
+                                
+                                
+                                
+                                <span class="label label-success">P</span>
+                                
+                                
+                                incr
+
+                            </a></li>
+                            
+                            <li><a href="./Hive.html#kill">
+                                
+                                
+                                <span class="label label-label">F</span>
+                                
+                                
+                                
+                                <span class="label label-success">P</span>
+                                
+                                
+                                kill
+
+                            </a></li>
+                            
+                            <li><a href="./Hive.html#prepend">
+                                
+                                
+                                <span class="label label-label">F</span>
+                                
+                                
+                                
+                                <span class="label label-success">P</span>
+                                
+                                
+                                prepend
+
+                            </a></li>
+                            
+                            <li><a href="./Hive.html#remove">
+                                
+                                
+                                <span class="label label-label">F</span>
+                                
+                                
+                                
+                                <span class="label label-success">P</span>
+                                
+                                
+                                remove
+
+                            </a></li>
+                            
+                            <li><a href="./Hive.html#replace">
+                                
+                                
+                                <span class="label label-label">F</span>
+                                
+                                
+                                
+                                <span class="label label-success">P</span>
+                                
+                                
+                                replace
+
+                            </a></li>
+                            
+                            <li><a href="./Hive.html#set">
+                                
+                                
+                                <span class="label label-label">F</span>
+                                
+                                
+                                
+                                <span class="label label-success">P</span>
+                                
+                                
+                                set
+
+                            </a></li>
+                            
+                        </ul>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+    <p><p>In memory store for Node JS.</p>
+</p>
+    
+
+    
+
+    
+    
+
+    <a name="constructor"></a>
+    <h3>Constructor</h3>
+
+    <em>Defined hive.js</em>
+    
+    
+    
+
+  
+  
+    <a name="__castKey"></a>
+    <h3>
+        __castKey
+        
+        
+        <span class="label label-label">Function</span>
+        
+        
+        <span class="label label-important">Private</span>
+        
+   </h3>
+
+<hr/>
+<em>Defined hive.js</em>
+
+<p><p>Casts a key
+</p>
+</p>
+
+
+    <em>Arguments</em>
+    <ul>
+    
+        <li> <em>key</em>  : <p>the key to cast</p>
+</li>
+    
+     </ul>
+
+
+
+
+    
+    <em>Source</em>
+    <pre class="prettyprint linenums lang-js">
+function (key){
+   //TODO make this overridable.
+   return &quot;&quot; + key;
+           
+}
+    </pre>
+    
+
+
+  
+    <a name="_checkValues"></a>
+    <h3>
+        _checkValues
+        
+        
+        <span class="label label-label">Function</span>
+        
+        
+        <span class="label label-important">Private</span>
+        
+   </h3>
+
+<hr/>
+<em>Defined hive.js</em>
+
+<p><p>Checks for expired values.
+</p>
+</p>
+
+
+
+
+
+    
+    <em>Source</em>
+    <pre class="prettyprint linenums lang-js">
+function (){
+   var timeTree = this.__timeTree,
+           valueTree = this.__values,
+           now = new Date().getTime();
+   var vals = this.__timeTree.findLessThan(now);
+   vals.forEach(function(v) {
+       timeTree.remove(v);
+       valueTree.remove(v);
+   });
+           
+}
+    </pre>
+    
+
+
+  
+    <a name="_convertSeconds"></a>
+    <h3>
+        _convertSeconds
+        
+        
+        <span class="label label-label">Function</span>
+        
+        
+        <span class="label label-important">Private</span>
+        
+   </h3>
+
+<hr/>
+<em>Defined hive.js</em>
+
+<p><p>Covert seconds to milliseconds
+</p>
+</p>
+
+
+    <em>Arguments</em>
+    <ul>
+    
+        <li> <em>seconds</em>  : <p>number of seconds to convert.</p>
+</li>
+    
+     </ul>
+
+
+
+
+    
+    <em>Source</em>
+    <pre class="prettyprint linenums lang-js">
+function (seconds){
+   return seconds * 60000;
+           
+}
+    </pre>
+    
+
+
+  
+    <a name="append"></a>
+    <h3>
+        append
+        
+        
+        <span class="label label-label">Function</span>
+        
+        
+                
+         <span class="label label-success">Public</span>
+                
+        
+   </h3>
+
+<hr/>
+<em>Defined hive.js</em>
+
+<p><p>Appends a value to a current value, if the current value is a string, and the appending
+value is a string then it will be appeneded to the value otherwise an array is created to
+store both values.
+
+</p>
+</p>
+
+
+    <em>Arguments</em>
+    <ul>
+    
+        <li> <em>key</em>  : <p>the key to look up.</p>
+</li>
+    
+        <li> <em>value</em>  : <p>the value to append</p>
+</li>
+    
+     </ul>
+
+
+
+
+    
+    <em>Source</em>
+    <pre class="prettyprint linenums lang-js">
+function (key,value){
+   var currNode = this.__values.find({key : key});
+   if (currNode) {
+       var currValue = currNode.value;
+       //if they are both strings assume you can just appened it!
+       if (comb.isString(currValue) &amp;&amp; comb.isString(value)) {
+           currNode.value += value;
+       } else {
+           //make it an array
+           currNode.value = [currValue, value];
+       }
+   }
+           
+}
+    </pre>
+    
+
+
+  
+    <a name="decr"></a>
+    <h3>
+        decr
+        
+        
+        <span class="label label-label">Function</span>
+        
+        
+                
+         <span class="label label-success">Public</span>
+                
+        
+   </h3>
+
+<hr/>
+<em>Defined hive.js</em>
+
+<p><p>Decrements a value, if it is numeric.
+
+</p>
+</p>
+
+
+    <em>Arguments</em>
+    <ul>
+    
+        <li> <em>key</em>  : <p>the key to look up the value to decrement.</p>
+</li>
+    
+     </ul>
+
+
+
+
+    
+    <em>Source</em>
+    <pre class="prettyprint linenums lang-js">
+function (key){
+   var num;
+   var currNode = this.__values.find({key : key});
+   if (currNode) {
+       var currValue = currNode.value;
+       if (comb.isNumber(currValue)) {
+           //update the pointers value
+           return --currNode.value;
+       } else {
+           num = Number(currValue);
+           if (!isNaN(num)) {
+               currNode.value = --num;
+           }
+       }
+   }
+   return num;
+           
+}
+    </pre>
+    
+
+
+  
+    <a name="flushAll"></a>
+    <h3>
+        flushAll
+        
+        
+        <span class="label label-label">Function</span>
+        
+        
+                
+         <span class="label label-success">Public</span>
+                
+        
+   </h3>
+
+<hr/>
+<em>Defined hive.js</em>
+
+<p><p>Remove all values from the store.
+</p>
+</p>
+
+
+
+
+
+    
+    <em>Source</em>
+    <pre class="prettyprint linenums lang-js">
+function (){
+   this.__values.clear();
+   this.__timeTree.clear();
+   return true;
+           
+}
+    </pre>
+    
+
+
+  
+    <a name="get"></a>
+    <h3>
+        get
+        
+        
+        <span class="label label-label">Function</span>
+        
+        
+                
+         <span class="label label-success">Public</span>
+                
+        
+   </h3>
+
+<hr/>
+<em>Defined hive.js</em>
+
+<p><p>Retrive the value for a specified key
+
+</p>
+</p>
+
+
+    <em>Arguments</em>
+    <ul>
+    
+        <li> <em>key</em>  : <p>the key to look up.  *</p>
+</li>
+    
+     </ul>
+
+
+    <em>Returns</em>
+    <ul>
+    
+        <li> <code>*</code> <p>the value or null if not found.</p>
+</li>
+    
+    </ul>
+
+
+
+    
+    <em>Source</em>
+    <pre class="prettyprint linenums lang-js">
+function (key){
+   key = this.__castKey(key);
+   var val = this.__values.find({key : key});
+   return val ? val.value : null;
+           
+}
+    </pre>
+    
+
+
+  
+    <a name="getKeyGt"></a>
+    <h3>
+        getKeyGt
+        
+        
+        <span class="label label-label">Function</span>
+        
+        
+                
+         <span class="label label-success">Public</span>
+                
+        
+   </h3>
+
+<hr/>
+<em>Defined hive.js</em>
+
+<p><p>Retrives all values with a greater than the provided key.
+
+</p>
+</p>
+
+
+    <em>Arguments</em>
+    <ul>
+    
+        <li> <em>key</em>  : <p>the key to look up.</p>
+</li>
+    
+     </ul>
+
+
+    <em>Returns</em>
+    <ul>
+    
+        <li> <code>Array</code> <p>an array of values.</p>
+</li>
+    
+    </ul>
+
+
+
+    
+    <em>Source</em>
+    <pre class="prettyprint linenums lang-js">
+function (key){
+   key = this.__castKey(key);
+   return this.__values.findGreaterThan({key : key}, true).map(function(v) {
+       return v.value
+   });
+           
+}
+    </pre>
+    
+
+
+  
+    <a name="getKeyGte"></a>
+    <h3>
+        getKeyGte
+        
+        
+        <span class="label label-label">Function</span>
+        
+        
+                
+         <span class="label label-success">Public</span>
+                
+        
+   </h3>
+
+<hr/>
+<em>Defined hive.js</em>
+
+<p><p>Retrives all values with a greater or equal to than the provided key.
+
+</p>
+</p>
+
+
+    <em>Arguments</em>
+    <ul>
+    
+        <li> <em>key</em>  : <p>the key to look up.</p>
+</li>
+    
+     </ul>
+
+
+    <em>Returns</em>
+    <ul>
+    
+        <li> <code>Array</code> <p>an array of values.</p>
+</li>
+    
+    </ul>
+
+
+
+    
+    <em>Source</em>
+    <pre class="prettyprint linenums lang-js">
+function (key){
+   key = this.__castKey(key);
+   return this.__values.findGreaterThan({key : key}).map(function(v) {
+       return v.value
+   });
+           
+}
+    </pre>
+    
+
+
+  
+    <a name="getKeyLt"></a>
+    <h3>
+        getKeyLt
+        
+        
+        <span class="label label-label">Function</span>
+        
+        
+                
+         <span class="label label-success">Public</span>
+                
+        
+   </h3>
+
+<hr/>
+<em>Defined hive.js</em>
+
+<p><p>Retrives all values with a key less than the provided key.
+
+</p>
+</p>
+
+
+    <em>Arguments</em>
+    <ul>
+    
+        <li> <em>key</em>  : <p>the key to look up.</p>
+</li>
+    
+     </ul>
+
+
+    <em>Returns</em>
+    <ul>
+    
+        <li> <code>Array</code> <p>an array of values.</p>
+</li>
+    
+    </ul>
+
+
+
+    
+    <em>Source</em>
+    <pre class="prettyprint linenums lang-js">
+function (key){
+   key = this.__castKey(key);
+   return this.__values.findLessThan({key : key}, true).map(function(v) {
+       return v.value
+   });
+           
+}
+    </pre>
+    
+
+
+  
+    <a name="getKeyLte"></a>
+    <h3>
+        getKeyLte
+        
+        
+        <span class="label label-label">Function</span>
+        
+        
+                
+         <span class="label label-success">Public</span>
+                
+        
+   </h3>
+
+<hr/>
+<em>Defined hive.js</em>
+
+<p><p>Retrives all values with a key less or equal to a than the provided key.
+
+</p>
+</p>
+
+
+    <em>Arguments</em>
+    <ul>
+    
+        <li> <em>key</em>  : <p>the key to look up.</p>
+</li>
+    
+     </ul>
+
+
+    <em>Returns</em>
+    <ul>
+    
+        <li> <code>Array</code> <p>an array of values.</p>
+</li>
+    
+    </ul>
+
+
+
+    
+    <em>Source</em>
+    <pre class="prettyprint linenums lang-js">
+function (key){
+   key = this.__castKey(key);
+   return this.__values.findLessThan({key : key}).map(function(v) {
+       return v.value
+   });
+           
+}
+    </pre>
+    
+
+
+  
+    <a name="incr"></a>
+    <h3>
+        incr
+        
+        
+        <span class="label label-label">Function</span>
+        
+        
+                
+         <span class="label label-success">Public</span>
+                
+        
+   </h3>
+
+<hr/>
+<em>Defined hive.js</em>
+
+<p><p>Increments a value, if it is numeric.
+
+</p>
+</p>
+
+
+    <em>Arguments</em>
+    <ul>
+    
+        <li> <em>key</em>  : <p>the key to look up the value to increment.</p>
+</li>
+    
+     </ul>
+
+
+
+
+    
+    <em>Source</em>
+    <pre class="prettyprint linenums lang-js">
+function (key){
+   var num;
+   var currNode = this.__values.find({key : key});
+   if (currNode) {
+       var currValue = currNode.value;
+       if (comb.isNumber(currValue)) {
+           //update the pointers value
+           return ++currNode.value;
+       } else {
+           num = Number(currValue);
+           if (!isNaN(num)) {
+               currNode.value = ++num;
+           }
+       }
+   }
+   return num;
+           
+}
+    </pre>
+    
+
+
+  
+    <a name="kill"></a>
+    <h3>
+        kill
+        
+        
+        <span class="label label-label">Function</span>
+        
+        
+                
+         <span class="label label-success">Public</span>
+                
+        
+   </h3>
+
+<hr/>
+<em>Defined hive.js</em>
+
+<p><p>Kills the clean up process for looking for expired keys.
+</p>
+</p>
+
+
+
+
+
+    
+    <em>Source</em>
+    <pre class="prettyprint linenums lang-js">
+function (){
+   clearInterval(this.__cleanupInterval);
+           
+}
+    </pre>
+    
+
+
+  
+    <a name="prepend"></a>
+    <h3>
+        prepend
+        
+        
+        <span class="label label-label">Function</span>
+        
+        
+                
+         <span class="label label-success">Public</span>
+                
+        
+   </h3>
+
+<hr/>
+<em>Defined hive.js</em>
+
+<p><p>Prepends a value to a current value, if the current value is a string, and the prepedning
+value is a string then it will be prepeneded to the value otherwise an array is created to
+store both values.
+
+</p>
+</p>
+
+
+    <em>Arguments</em>
+    <ul>
+    
+        <li> <em>key</em>  : <p>the key to look up.</p>
+</li>
+    
+        <li> <em>value</em>  : <p>the value to prepend</p>
+</li>
+    
+     </ul>
+
+
+
+
+    
+    <em>Source</em>
+    <pre class="prettyprint linenums lang-js">
+function (key,value){
+   var currNode = this.__values.find({key : key});
+   if (currNode) {
+       var currValue = currNode.value;
+       //if they are both strings assume you can just appened it!
+       if (comb.isString(currValue) &amp;&amp; comb.isString(value)) {
+           currNode.value = value + currValue;
+       } else {
+           //make it an array
+           currNode.value = [value, currValue];
+       }
+   }
+           
+}
+    </pre>
+    
+
+
+  
+    <a name="remove"></a>
+    <h3>
+        remove
+        
+        
+        <span class="label label-label">Function</span>
+        
+        
+                
+         <span class="label label-success">Public</span>
+                
+        
+   </h3>
+
+<hr/>
+<em>Defined hive.js</em>
+
+<p><p>Remove a value from this store.
+
+</p>
+</p>
+
+
+    <em>Arguments</em>
+    <ul>
+    
+        <li> <em>key</em>  : <p>the key of the key value pair to remove.</p>
+</li>
+    
+     </ul>
+
+
+
+
+    
+    <em>Source</em>
+    <pre class="prettyprint linenums lang-js">
+function (key){
+   var currValue = this.__values.find({key : key});
+   if (currValue) {
+       this.__values.remove(currValue);
+       if (currValue.expires != Infinity) {
+           this.__timeTree.remove(currValue);
+       }
+   }
+   return null;
+           
+}
+    </pre>
+    
+
+
+  
+    <a name="replace"></a>
+    <h3>
+        replace
+        
+        
+        <span class="label label-label">Function</span>
+        
+        
+                
+         <span class="label label-success">Public</span>
+                
+        
+   </h3>
+
+<hr/>
+<em>Defined hive.js</em>
+
+<p><p>Replace a key value pair in this Store.
+
+</p>
+</p>
+
+
+    <em>Arguments</em>
+    <ul>
+    
+        <li> <em>key</em>  : <p>the key to store</p>
+</li>
+    
+        <li> <em>value</em>  : <p>the value to asociate with the key.</p>
+</li>
+    
+        <li> <em>[expires= <code>Infinity</code>]</em>  : <p>if provided sets a max life on a key, value pair.</p>
+</li>
+    
+     </ul>
+
+
+    <em>Returns</em>
+    <ul>
+    
+        <li> <code>*</code> <p>the value</p>
+</li>
+    
+    </ul>
+
+
+
+    
+    <em>Source</em>
+    <pre class="prettyprint linenums lang-js">
+function (key,value,expires){
+   var currValue = this.__values.find({key : key});
+   if (currValue) {
+       currValue.value = value;
+   } else {
+       this.set(key, value, expires);
+   }
+   return value;
+           
+}
+    </pre>
+    
+
+
+  
+    <a name="set"></a>
+    <h3>
+        set
+        
+        
+        <span class="label label-label">Function</span>
+        
+        
+                
+         <span class="label label-success">Public</span>
+                
+        
+   </h3>
+
+<hr/>
+<em>Defined hive.js</em>
+
+<p><p>Set a key value pair.
+</p>
+</p>
+
+
+    <em>Arguments</em>
+    <ul>
+    
+        <li> <em>key</em>  : <p>the key to store</p>
+</li>
+    
+        <li> <em>value</em>  : <p>the value to asociate with the key.</p>
+</li>
+    
+        <li> <em>[expires= <code>Infinity</code>]</em>  : <p>if provided sets a max life on a key, value pair.
+
+</p>
+<p>*</p>
+</li>
+    
+     </ul>
+
+
+    <em>Returns</em>
+    <ul>
+    
+        <li> <code>*</code> <p>the value</p>
+</li>
+    
+    </ul>
+
+
+
+    
+    <em>Source</em>
+    <pre class="prettyprint linenums lang-js">
+function (key,value,expires){
+   expires = !expires ? Infinity : new Date().getTime() + this._convertSeconds(expires);
+   //we need to keep expires to ensure we can look up from tree also;
+   var node = {key : key, value : value, expires : expires};
+   //store the pointer in both
+   this.__values.insert(node);
+   if (expires != Infinity) {
+       //dont worry about saving values that are set to infinity
+       //as it doesnt matter
+       this.__timeTree.insert(node);
+   }
+   return value;
+           
+}
+    </pre>
+    
+
+
+  
+<hr>
+
+    
+  <h2>License</h2>
+<p>MIT <a href="https://github.com/C2FO/hive/raw/master/LICENSE">https://github.com/C2FO/hive/raw/master/LICENSE</a>
+
+</p>
+<h2>Meta</h2>
+<p>Code: <code>git clone git://github.com/c2fo/hive.git</code>
+JsDoc: <a href="http://c2fo.github.com/hive">http://c2fo.github.com/hive</a>
+Website:  <a href="http://c2fo.com">http://c2fo.com</a> - Twitter: <a href="http://twitter.com/c2fo">http://twitter.com/c2fo</a> - 877.465.4045</p>
+
+
+
+
+</div>
+</div>
+<script type="text/javascript" src="./assets/js/jquery.js"></script>
+<script type="text/javascript" src="./assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="./assets/js/prettify.js"></script>
+
+</body>
+</html>

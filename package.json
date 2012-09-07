@@ -1,12 +1,12 @@
 {
     "name": "hive-cache",
     "description": "A caching tool for node",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "repository": {
         "type": "git",
-        "url": "git@github.com:Pollen/hive.git"
+        "url": "git@github.com:C2FO/hive.git"
     },
-    "author": "Doug Martin (http://pollenware.github.com)",
+    "author": "Doug Martin (http://c2fo.github.com)",
     "main": "index.js",
     "directories": {
         "lib": "lib"
